@@ -40,8 +40,6 @@ public class PnTConnectorClient {
         System.setProperty("javax.net.ssl.trustStore",keyStore.getPath());
         System.setProperty("javax.net.ssl.trustStorePassword ","changeit");
 
-
-;
         Map<String, String> parameter = new HashMap<String, String>();
         parameter.put(SessionParameter.USER,username);
         parameter.put(SessionParameter.PASSWORD,password);

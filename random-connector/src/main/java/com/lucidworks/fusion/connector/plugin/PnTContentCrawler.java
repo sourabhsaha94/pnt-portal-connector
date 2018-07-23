@@ -10,7 +10,7 @@ import java.util.List;
 public class PnTContentCrawler {
 
     String startFolder;
-    private String[] DO_NOT_CRAWL = new String[]{"_trash","Archive"};
+    private String[] DO_NOT_CRAWL = new String[]{"_trash","Archive","Training and Certification"};
 
 
     public PnTContentCrawler(String startFolder){
