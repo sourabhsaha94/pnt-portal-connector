@@ -87,7 +87,6 @@ public class PnTConnectorFetcher implements Fetcher {
     for(Property p : document.getProperties()){
       contentMap.put(p.getId()+"_s",p.getValueAsString());
     }
-    contentMap.put("url_s",document.getContentUrl());
 
     fetchContext.emitDocument(contentMap);
 
