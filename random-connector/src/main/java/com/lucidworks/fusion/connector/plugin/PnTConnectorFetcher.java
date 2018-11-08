@@ -1,10 +1,11 @@
 package com.lucidworks.fusion.connector.plugin;
 
-import com.lucidworks.fusion.connector.plugin.api.fetcher.Fetcher;
-import com.lucidworks.fusion.connector.plugin.api.fetcher.context.FetchContext;
-import com.lucidworks.fusion.connector.plugin.api.fetcher.context.PreFetchContext;
-import com.lucidworks.fusion.connector.plugin.api.fetcher.context.StartContext;
-import com.lucidworks.fusion.connector.plugin.api.message.fetcher.FetchInput;
+import com.lucidworks.fusion.connector.plugin.api.fetcher.result.FetchResult;
+import com.lucidworks.fusion.connector.plugin.api.fetcher.result.PreFetchResult;
+import com.lucidworks.fusion.connector.plugin.api.fetcher.result.StartResult;
+import com.lucidworks.fusion.connector.plugin.api.fetcher.type.content.ContentFetcher;
+import com.lucidworks.fusion.connector.plugin.api.fetcher.type.content.FetchInput;
+import com.lucidworks.fusion.connector.plugin.api.fetcher.type.content.MessageHelper;
 import org.apache.chemistry.opencmis.client.api.Document;
 import org.apache.chemistry.opencmis.client.api.Property;
 import org.apache.chemistry.opencmis.client.api.Session;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-public class PnTConnectorFetcher implements Fetcher {
+public class PnTConnectorFetcher implements ContentFetcher {
 
   private final Logger logger;
   private final PnTConnectorConfig pntConnectorConfig;
@@ -41,9 +42,9 @@ public class PnTConnectorFetcher implements Fetcher {
   @Override
   public StartResult start(StartContext startContext) {
 
-    username = pntConnectorConfig.getProperties().getUsername();
-    password = pntConnectorConfig.getProperties().getPassword();
-    startFolder = pntConnectorConfig.getProperties().getStartFolder();
+    username = pntConnectorConfig.properties().username();
+    password = pntConnectorConfig.properties().password();
+    startFolder = pntConnectorConfig.properties().startFolder();
 
     session = PnTConnectorClient.getConnectorClient(username,password).getSession();
 
@@ -55,7 +56,7 @@ public class PnTConnectorFetcher implements Fetcher {
     //phaseList.add(Phase.builder("test-phase1").build());
     //phaseList.add(Phase.builder("test-phase2").build());
 
-    return StartResult.DEFAULT;//StartResult.builder().withPhases(phaseList).build();
+    return new StartResult();//StartResult.builder().withPhases(phaseList).build();
   }
 
   @Override
@@ -64,9 +65,7 @@ public class PnTConnectorFetcher implements Fetcher {
     IntStream.range(0, documentIdList.size()).asLongStream().forEach(i -> {
       logger.info("Emitting candidate -> number {}", i);
       Map<String, Object> data = Collections.singletonMap("number", (int)i);
-      preFetchContext.emitCandidate(
-          String.valueOf(i), Collections.emptyMap(), data
-      );
+      preFetchContext.emitCandidate(MessageHelper.candidate(String.valueOf(i), Collections.emptyMap(), data).build());
     });
     return preFetchContext.newResult();
   }

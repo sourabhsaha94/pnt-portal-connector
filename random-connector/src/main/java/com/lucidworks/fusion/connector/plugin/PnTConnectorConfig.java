@@ -1,7 +1,7 @@
 package com.lucidworks.fusion.connector.plugin;
 
 import com.lucidworks.fusion.connector.plugin.api.config.ConnectorConfig;
-import com.lucidworks.fusion.connector.plugin.api.config.FetcherProperties;
+import com.lucidworks.fusion.connector.plugin.api.config.ConnectorPluginProperties;
 import com.lucidworks.fusion.schema.SchemaAnnotations.Property;
 import com.lucidworks.fusion.schema.SchemaAnnotations.RootSchema;
 
@@ -17,29 +17,29 @@ public interface PnTConnectorConfig extends ConnectorConfig<PnTConnectorConfig.P
       title = "Properties",
       required = true
   )
-  public Properties getProperties();
+  Properties properties();
 
   /**
    * Connector specific settings
    */
-  interface Properties extends FetcherProperties {
+  interface Properties extends ConnectorPluginProperties {
 
     @Property(
             title = "Username",
             description = "User who is accessing the alfresco instance"
     )
-    public String getUsername();
+    String username();
 
     @Property(
             title = "Password"
     )
-    public String getPassword();
+    String password();
 
     @Property(
             title = "Start folder",
             description = "Start location of the crawl (location must start with / and not end with /)"
     )
-    public String getStartFolder();
+    String startFolder();
 
   }
 
