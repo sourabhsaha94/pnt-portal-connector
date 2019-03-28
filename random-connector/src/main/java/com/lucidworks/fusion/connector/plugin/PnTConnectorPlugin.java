@@ -17,7 +17,7 @@ public class PnTConnectorPlugin extends ConnectorPluginModule {
   public ConnectorPlugin getConnectorPlugin() {
 
     return builder(PnTConnectorConfig.class)
-        .withFetcher(PnTConnectorFetcher.class)
+        .withFetcher("content", PnTConnectorFetcher.class)
         .build();
   }
 }
