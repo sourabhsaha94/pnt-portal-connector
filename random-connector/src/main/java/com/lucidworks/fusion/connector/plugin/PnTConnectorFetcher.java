@@ -47,13 +47,14 @@ public class PnTConnectorFetcher implements ContentFetcher {
     session = PnTConnectorClient.getConnectorClient(username, password, url).getSession();
     pnTContentCrawler = new PnTContentCrawler(startFolder);
 
-    documentIdList = pnTContentCrawler.getAllDocuments(session);
 
     return startContext.newResult();
   }
 
   @Override
   public PreFetchResult preFetch(PreFetchContext preFetchContext) {
+
+    documentIdList = pnTContentCrawler.getAllDocuments(session);
 
     IntStream.range(0, documentIdList.size())
         .asLongStream()
