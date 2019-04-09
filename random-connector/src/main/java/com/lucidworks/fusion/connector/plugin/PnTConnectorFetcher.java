@@ -6,6 +6,7 @@ import com.lucidworks.fusion.connector.plugin.api.fetcher.result.StartResult;
 import com.lucidworks.fusion.connector.plugin.api.fetcher.type.content.ContentFetcher;
 import com.lucidworks.fusion.connector.plugin.api.fetcher.type.content.FetchInput;
 import com.lucidworks.fusion.connector.plugin.api.fetcher.type.content.MessageHelper;
+import org.apache.chemistry.opencmis.client.api.CmisObject;
 import org.apache.chemistry.opencmis.client.api.Document;
 import org.apache.chemistry.opencmis.client.api.Property;
 import org.apache.chemistry.opencmis.client.api.Session;
@@ -13,10 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class PnTConnectorFetcher implements ContentFetcher {
@@ -47,7 +45,6 @@ public class PnTConnectorFetcher implements ContentFetcher {
     startFolder = pntConnectorConfig.properties().startFolder();
 
     session = PnTConnectorClient.getConnectorClient(username, password, url).getSession();
-
     pnTContentCrawler = new PnTContentCrawler(startFolder);
 
     documentIdList = pnTContentCrawler.getAllDocuments(session);

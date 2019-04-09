@@ -24,6 +24,7 @@ public class PnTContentCrawler {
     List<String> crawl(CmisObject object){
 
         List<String> objectIds = new ArrayList<>();
+        System.out.println(object.getName());
 
         if(object.getBaseType().getDisplayName().equalsIgnoreCase("Folder")){
 

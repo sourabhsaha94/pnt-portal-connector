@@ -8,7 +8,7 @@ import com.lucidworks.fusion.schema.SchemaAnnotations.StringSchema;
 
 @RootSchema(
     name = "redhat.pnt.connector",
-    title = "PnT Connector", // TODO What does Pnt mean?
+    title = "PnT Connector",
     description = "A connector that retrieves documents from alfresco instance",
     category = "CMIS"
 )
@@ -23,19 +23,22 @@ public interface PnTConnectorConfig extends ConnectorConfig<PnTConnectorConfig.P
     String username();
 
     @Property(title = "Password")
-    @StringSchema(encrypted = true)
+    //@StringSchema(encrypted = true) Adding this line leads to configuration errors
     String password();
 
+    //Used this in url https://alfpnt.intranet.dev.int.devlab.redhat.com/alfresco/api/-default-/public/cmis/versions/1.1/atom
     @Property(
         title = "Alfesco Url",
         description = "")
+    @StringSchema(defaultValue = "https://alfpnt01.web.stage.int.phx2.redhat.com/alfresco/api/-default-/public/cmis/versions/1.1/atom")
     String url();
 
+    //Used this in startFolder /Sites/pnt-portal/documentLibrary/Customer success
     @Property(
         title = "Start folder",
         description = "Start location of the crawl (location must start with / and not end with /)"
     )
-    @StringSchema(defaultValue = "/")
+    @StringSchema(defaultValue = "/Sites/pnt-portal/documentLibrary")
     String startFolder();
   }
 }

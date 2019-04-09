@@ -34,23 +34,22 @@ public class PnTConnectorClient {
 
   private PnTConnectorClient(String username, String password, String folder) {
 
-    /*System.out.println("GETTING TRUST STORE");
+    //Trust store needs to be added to connect to remote alfresco instance. Can be commented for localhost
+    System.out.println("GETTING TRUST STORE");
 
     try {
-       keyStore = stream2file(getClass().getResourceAsStream("/pnt-portal.jks"));
+       keyStore = stream2file(getClass().getResourceAsStream("/pnt-portal-dev.jks"));
     } catch (IOException e) {
         e.printStackTrace();
     }
 
     System.setProperty("javax.net.ssl.trustStore",keyStore.getPath());
     System.setProperty("javax.net.ssl.trustStorePassword ","changeit");
-    */
+
     Map<String, String> parameter = new HashMap<String, String>();
     parameter.put(SessionParameter.USER, username);
     parameter.put(SessionParameter.PASSWORD, password);
-    parameter.put(SessionParameter.ATOMPUB_URL, folder); // diff binding per type??
-    // TODO: binding Type in config?
-    // parameter.put(SessionParameter.BINDING_TYPE, BindingType.BROWSER.value());
+    parameter.put(SessionParameter.ATOMPUB_URL, folder);
     parameter.put(SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
 
     logger.info("Session using " + username + " -> " + folder);
