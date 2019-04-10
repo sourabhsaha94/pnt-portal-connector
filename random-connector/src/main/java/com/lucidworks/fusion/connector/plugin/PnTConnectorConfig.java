@@ -30,7 +30,7 @@ public interface PnTConnectorConfig extends ConnectorConfig<PnTConnectorConfig.P
     @Property(
         title = "Alfesco Url",
         description = "")
-    @StringSchema(defaultValue = "https://pnt.stage.redhat.com/alfresco/api/-default-/public/cmis/versions/1.1/atom")
+    @StringSchema(defaultValue = "https://pnt.stage.redhat.com/alfresco/api/-default-/public/cmis/versions/1.1/browser")
     String url();
 
     //Used this in startFolder /Sites/pnt-portal/documentLibrary/Customer success

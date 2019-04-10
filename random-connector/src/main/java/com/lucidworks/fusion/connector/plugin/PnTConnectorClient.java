@@ -49,8 +49,8 @@ public class PnTConnectorClient {
     Map<String, String> parameter = new HashMap<String, String>();
     parameter.put(SessionParameter.USER, username);
     parameter.put(SessionParameter.PASSWORD, password);
-    parameter.put(SessionParameter.ATOMPUB_URL, folder);
-    parameter.put(SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
+    parameter.put(SessionParameter.BROWSER_URL, folder);
+    parameter.put(SessionParameter.BINDING_TYPE, BindingType.BROWSER.value());
 
     logger.info("Session using " + username + " -> " + folder);
 
